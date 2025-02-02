@@ -1,80 +1,156 @@
 #include <iostream>
-#include <string>
-
 
 using namespace std;
 
 class TelephoneBook
 {
-    string m_name;
-    string m_homePhone;
-    string m_workPhone;
-    string m_mobilePhone;
-    string m_additionalInformation;
-
+    char* m_name;
+    char* m_homePhone;
+    char* m_workPhone;
+    char* m_mobilePhone;
+    char* m_additionalInformation;
 
 public:
-    TelephoneBook(const string& name, const string& homePhone, const string& workPhone, const string& mobilePhone, const string& additionalInformation)
-        : m_name(name)
-        , m_homePhone(homePhone)
-        , m_workPhone(workPhone)
-        , m_mobilePhone(mobilePhone)
-        , m_additionalInformation(additionalInformation)
+    TelephoneBook(const char* name, const char* homePhone, const char* workPhone, const char* mobilePhone, const char* additionalInformation)
     {
+        m_name = new char[strlen(name) + 1];
+        for (size_t i = 0; i <= strlen(name); ++i)
+            m_name[i] = name[i];
+
+        m_homePhone = new char[strlen(homePhone) + 1];
+        for (size_t i = 0; i <= strlen(homePhone); ++i)
+            m_homePhone[i] = homePhone[i];
+
+        m_workPhone = new char[strlen(workPhone) + 1];
+        for (size_t i = 0; i <= strlen(workPhone); ++i)
+            m_workPhone[i] = workPhone[i];
+
+        m_mobilePhone = new char[strlen(mobilePhone) + 1];
+        for (size_t i = 0; i <= strlen(m_mobilePhone); ++i)
+            m_mobilePhone[i] = mobilePhone[i];
+
+        m_additionalInformation = new char[strlen(additionalInformation) + 1];
+        for (size_t i = 0; i <= strlen(additionalInformation); ++i)
+            m_additionalInformation[i] = additionalInformation[i];
+    }
+
+    TelephoneBook() 
+        : m_name(nullptr)
+        , m_homePhone(nullptr)
+        , m_workPhone(nullptr)
+        , m_mobilePhone(nullptr)
+        , m_additionalInformation(nullptr) 
+    {}
+
+    TelephoneBook(const TelephoneBook& copy)
+    {
+        m_name = new char[strlen(copy.m_name) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_name); ++i)
+            m_name[i] = copy.m_name[i];
+
+        m_homePhone = new char[strlen(copy.m_homePhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_homePhone); ++i)
+            m_homePhone[i] = copy.m_homePhone[i];
+
+        m_workPhone = new char[strlen(copy.m_workPhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_workPhone); ++i)
+            m_workPhone[i] = copy.m_workPhone[i];
+
+        m_mobilePhone = new char[strlen(copy.m_mobilePhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_mobilePhone); ++i)
+            m_mobilePhone[i] = copy.m_mobilePhone[i];
+
+        m_additionalInformation = new char[strlen(copy.m_additionalInformation) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_additionalInformation); ++i)
+            m_additionalInformation[i] = copy.m_additionalInformation[i];
+    }
+
+    TelephoneBook& operator=(const TelephoneBook& copy)
+    {
+        if (this == &copy) return *this;
+
+        delete[] m_name;
+        delete[] m_homePhone;
+        delete[] m_workPhone;
+        delete[] m_mobilePhone;
+        delete[] m_additionalInformation;
+
+        m_name = new char[strlen(copy.m_name) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_name); ++i)
+            m_name[i] = copy.m_name[i];
+
+        m_homePhone = new char[strlen(copy.m_homePhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_homePhone); ++i)
+            m_homePhone[i] = copy.m_homePhone[i];
+
+        m_workPhone = new char[strlen(copy.m_workPhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_workPhone); ++i)
+            m_workPhone[i] = copy.m_workPhone[i];
+
+        m_mobilePhone = new char[strlen(copy.m_mobilePhone) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_mobilePhone); ++i)
+            m_mobilePhone[i] = copy.m_mobilePhone[i];
+
+        m_additionalInformation = new char[strlen(copy.m_additionalInformation) + 1];
+        for (size_t i = 0; i <= strlen(copy.m_additionalInformation); ++i)
+            m_additionalInformation[i] = copy.m_additionalInformation[i];
+
+        return *this;
     }
 
     ~TelephoneBook()
     {
+        delete[] m_name;
+        delete[] m_homePhone;
+        delete[] m_workPhone;
+        delete[] m_mobilePhone;
+        delete[] m_additionalInformation;
     }
 
-    const string& getName() const
+    const char* getName() const { return m_name; }
+    const char* getHomePhone() const { return m_homePhone; }
+    const char* getWorkPhone() const { return m_workPhone; }
+    const char* getMobilePhone() const { return m_mobilePhone; }
+    const char* getAdditionalInformation() const { return m_additionalInformation; }
+
+    void setName(const char* name)
     {
-        return m_name;
+        delete[] m_name;
+        m_name = new char[strlen(name) + 1];
+        for (size_t i = 0; i <= strlen(name); ++i)
+            m_name[i] = name[i];
     }
 
-    const string& getHomePhone() const
+    void setHomePhone(const char* homePhone)
     {
-        return m_homePhone;
+        delete[] m_homePhone;
+        m_homePhone = new char[strlen(homePhone) + 1];
+        for (size_t i = 0; i <= strlen(homePhone); ++i)
+            m_homePhone[i] = homePhone[i];
     }
 
-    const string& getWorkPhone() const
+    void setWorkPhone(const char* workPhone)
     {
-        return m_workPhone;
+        delete[] m_workPhone;
+        m_workPhone = new char[strlen(workPhone) + 1];
+        for (size_t i = 0; i <= strlen(workPhone); ++i)
+            m_workPhone[i] = workPhone[i];
     }
 
-    const string& getMobilePhone() const
+    void setMobilePhone(const char* mobilePhone)
     {
-        return m_mobilePhone;
+        delete[] m_mobilePhone;
+        m_mobilePhone = new char[strlen(mobilePhone) + 1];
+        for (size_t i = 0; i <= strlen(m_mobilePhone); ++i)
+            m_mobilePhone[i] = mobilePhone[i];
     }
 
-    const string& getAdditionalInformation() const
+    void setAdditionalInformation(const char* additionalInformation)
     {
-        return m_additionalInformation;
-    }
-
-    void setName(const string& name)
-    {
-        m_name = name;
-    }
-
-    void setHomePhone(const string& homePhone)
-    {
-        m_homePhone = homePhone;
-    }
-
-    void setWorkPhone(const string& workPhone)
-    {
-        m_workPhone = workPhone;
-    }
-
-    void setMobilePhone(const string& mobilePhone)
-    {
-        m_mobilePhone = mobilePhone;
-    }
-
-    void setAdditionalInformation(const string& additionalInformation)
-    {
-        m_additionalInformation = additionalInformation;
+        delete[] m_additionalInformation;
+        m_additionalInformation = new char[strlen(additionalInformation) + 1];
+        for (size_t i = 0; i <= strlen(additionalInformation); ++i)
+            m_additionalInformation[i] = additionalInformation[i];
     }
 
     void dataEntry() const
@@ -89,39 +165,28 @@ public:
 
 class PhoneBookManager
 {
-    TelephoneBook* m_contacts[100];
+    TelephoneBook m_contacts[100];
     int m_contactCount;
 
 public:
-
-    ~PhoneBookManager()
-    {
-        for (int i = 0; i < m_contactCount; ++i)
-        {
-            delete m_contacts[i];
-        }
-    }
-
     PhoneBookManager() : m_contactCount(0) {}
 
     void addContact(const TelephoneBook& contact)
     {
         if (m_contactCount < 100) {
-            m_contacts[m_contactCount] = new TelephoneBook(contact);
-            m_contactCount++;
+            m_contacts[m_contactCount++] = contact;
         }
         else {
-            cout << "Full!" << endl;
+            cout << "Phone book is full!" << endl;
         }
     }
 
-    void removeContact(const string& name)
+    void removeContact(const char* name)
     {
         for (int i = 0; i < m_contactCount; ++i)
         {
-            if (m_contacts[i]->getName() == name)
+            if (strcmp(m_contacts[i].getName(), name) == 0)
             {
-                delete m_contacts[i];
                 for (int j = i; j < m_contactCount - 1; ++j)
                 {
                     m_contacts[j] = m_contacts[j + 1];
@@ -134,13 +199,13 @@ public:
         cout << "Contact " << name << " not found" << endl;
     }
 
-    void searchContact(const string& name) const
+    void searchContact(const char* name) const
     {
         for (int i = 0; i < m_contactCount; ++i)
         {
-            if (m_contacts[i]->getName() == name)
+            if (strcmp(m_contacts[i].getName(), name) == 0)
             {
-                m_contacts[i]->dataEntry();
+                m_contacts[i].dataEntry();
                 return;
             }
         }
@@ -149,28 +214,36 @@ public:
 
     void showAllContacts() const
     {
-        if (m_contactCount == 0)
-        {
+        if (m_contactCount == 0) {
             cout << "No contacts available" << endl;
             return;
         }
+
         for (int i = 0; i < m_contactCount; ++i)
         {
-            m_contacts[i]->dataEntry();
+            m_contacts[i].dataEntry();
             cout << "-------------------" << endl;
         }
     }
+
+    void saveToFile(const char* filename) const
+    {
+        cout << "Saving file" << endl;
+    }
+
+    void loadFromFile(const char* filename)
+    {
+        cout << "Loading file" << endl;
+    }
 };
+
 
 int main()
 {
     PhoneBookManager phoneBookManager;
 
-    TelephoneBook contact1("Mark Wahlberg", "44444444444", "52", "*", "Actor, producer");
-    phoneBookManager.addContact(contact1);
-
-    TelephoneBook contact2("John Smith", "525252525252", "3", "4242424242", "Friend");
-    phoneBookManager.addContact(contact2);
+    phoneBookManager.addContact(TelephoneBook("Mark Wahlberg", "44444444444", "52", "*", "Actor, producer"));
+    phoneBookManager.addContact(TelephoneBook("John Smith", "525252525252", "3", "4242424242", "Friend"));
 
     cout << "All Contacts:" << endl;
     phoneBookManager.showAllContacts();
